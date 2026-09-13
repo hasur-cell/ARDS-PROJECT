@@ -3189,6 +3189,812 @@ body.auth-locked .ards-chatbot-root {
 }
 
 /* ==========================================================================
+   ARDS 2026 VISUAL SYSTEM
+   A calmer, high-signal clinical workspace. Behaviour and DOM hooks remain
+   unchanged; this layer intentionally owns the final visual treatment.
+   ========================================================================== */
+:root {
+  --bg-app: #07111b;
+  --bg-surface: #0b1723;
+  --bg-surface-elevated: #102131;
+  --bg-card: rgba(13, 29, 43, 0.88);
+  --bg-card-hover: rgba(17, 39, 56, 0.98);
+  --bg-input: #091823;
+  --bg-glass: rgba(9, 23, 35, 0.78);
+  --border-subtle: rgba(148, 190, 208, 0.12);
+  --border-card: rgba(148, 190, 208, 0.17);
+  --border-glow: rgba(62, 215, 207, 0.45);
+  --border-active: rgba(62, 215, 207, 0.75);
+  --text-main: #d9e8ed;
+  --text-muted: #8fa9b5;
+  --text-dim: #5e7887;
+  --text-heading: #f3fbfc;
+  --color-primary: #27c3da;
+  --color-primary-hover: #62e2ea;
+  --color-primary-subtle: rgba(39, 195, 218, 0.12);
+  --color-teal: #2dd4bf;
+  --color-teal-subtle: rgba(45, 212, 191, 0.12);
+  --color-emerald: #52d99f;
+  --shadow-card: 0 16px 42px rgba(0, 0, 0, 0.22), 0 1px 0 rgba(255, 255, 255, 0.035) inset;
+  --shadow-elevated: 0 22px 54px rgba(0, 0, 0, 0.36), 0 0 28px rgba(39, 195, 218, 0.08);
+  --shadow-glow: 0 0 28px rgba(39, 195, 218, 0.13);
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --header-height: 74px;
+  --sidebar-width: 286px;
+  --t-fast: 0.18s ease;
+  --t-base: 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-theme="light"] {
+  --bg-app: #edf5f5;
+  --bg-surface: #f9fcfc;
+  --bg-surface-elevated: #eef7f7;
+  --bg-card: rgba(255, 255, 255, 0.94);
+  --bg-card-hover: #ffffff;
+  --bg-input: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.86);
+  --border-subtle: rgba(15, 84, 96, 0.12);
+  --border-card: rgba(15, 84, 96, 0.16);
+  --border-glow: rgba(8, 145, 178, 0.42);
+  --border-active: rgba(8, 145, 178, 0.68);
+  --text-main: #23404b;
+  --text-muted: #55717b;
+  --text-dim: #78909a;
+  --text-heading: #102d38;
+  --color-primary: #0891b2;
+  --color-primary-hover: #0e7490;
+  --color-primary-subtle: rgba(8, 145, 178, 0.10);
+  --color-teal: #0f9f93;
+  --color-teal-subtle: rgba(15, 159, 147, 0.10);
+  --color-emerald: #059669;
+  --shadow-card: 0 14px 36px rgba(27, 76, 86, 0.08), 0 1px 0 rgba(255, 255, 255, 0.9) inset;
+  --shadow-elevated: 0 22px 46px rgba(27, 76, 86, 0.14), 0 0 20px rgba(8, 145, 178, 0.08);
+  --shadow-glow: 0 0 24px rgba(8, 145, 178, 0.10);
+}
+
+body {
+  background:
+    radial-gradient(900px 520px at 85% -15%, rgba(39, 195, 218, 0.08), transparent 68%),
+    radial-gradient(740px 480px at -12% 105%, rgba(45, 212, 191, 0.07), transparent 70%),
+    var(--bg-app);
+  color: var(--text-main);
+  letter-spacing: 0.005em;
+}
+
+body::after {
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,.38), transparent 48%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,.38), transparent 48%);
+}
+
+[data-theme="light"] body::after {
+  background:
+    linear-gradient(90deg, rgba(15,84,96,0.035) 1px, transparent 1px),
+    linear-gradient(rgba(15,84,96,0.035) 1px, transparent 1px);
+}
+
+.app-sidebar {
+  background:
+    linear-gradient(180deg, rgba(17, 41, 56, 0.96), rgba(7, 18, 28, 0.98));
+  border-right: 1px solid rgba(148, 190, 208, 0.14);
+  box-shadow: 18px 0 48px rgba(0, 0, 0, 0.10);
+}
+
+[data-theme="light"] .app-sidebar {
+  background: linear-gradient(180deg, #f9fdfd, #edf7f7);
+  border-right-color: rgba(15, 84, 96, 0.12);
+  box-shadow: 18px 0 48px rgba(27, 76, 86, 0.06);
+}
+
+.sidebar-logo {
+  min-height: var(--header-height);
+  padding: 1.15rem 1.25rem;
+  border-bottom-color: rgba(148, 190, 208, 0.12);
+}
+
+.ards-logo {
+  background: linear-gradient(135deg, #22c7dd 0%, #1aa995 100%);
+  box-shadow: 0 10px 24px rgba(28, 193, 198, 0.24);
+}
+
+.ards-wordmark {
+  font-size: 0.84rem;
+  letter-spacing: 0;
+}
+
+.sidebar-nav {
+  padding: 1.15rem 0.85rem;
+  gap: 0.35rem;
+}
+
+.sidebar-nav::before {
+  content: "WORKSPACE";
+  display: block;
+  padding: 0 0.75rem 0.45rem;
+  color: var(--text-dim);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.nav-btn {
+  min-height: 45px;
+  padding: 0.68rem 0.8rem;
+  gap: 0.78rem;
+  border-radius: 13px;
+  font-size: 0.79rem;
+  color: var(--text-muted);
+  transition: background var(--t-base), border-color var(--t-base), color var(--t-base), transform var(--t-base), box-shadow var(--t-base);
+}
+
+.nav-btn:hover {
+  transform: translateX(4px);
+  background: rgba(39, 195, 218, 0.08);
+  border-color: rgba(39, 195, 218, 0.18);
+  color: var(--text-heading);
+}
+
+.nav-btn-active {
+  color: #baf5f4;
+  background: linear-gradient(90deg, rgba(39, 195, 218, 0.17), rgba(45, 212, 191, 0.06));
+  border-color: rgba(62, 215, 207, 0.30);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .nav-btn-active {
+  color: #08778c;
+  background: linear-gradient(90deg, rgba(8, 145, 178, 0.14), rgba(15, 159, 147, 0.05));
+}
+
+.nav-btn-active::before {
+  left: -0.85rem;
+  width: 4px;
+  height: 70%;
+  background: linear-gradient(180deg, #55e2e6, #2dd4bf);
+  box-shadow: 0 0 14px rgba(45, 212, 191, 0.70);
+}
+
+.nav-btn i {
+  width: 18px;
+  height: 18px;
+  filter: saturate(0.86);
+}
+
+.sidebar-footer {
+  margin: 0.65rem 0.85rem 1rem !important;
+  padding: 0.85rem !important;
+  border: 1px solid rgba(245, 190, 64, 0.16) !important;
+  border-radius: 14px !important;
+  background: rgba(245, 190, 64, 0.055) !important;
+}
+
+.app-main {
+  position: relative;
+}
+
+.app-header {
+  min-height: var(--header-height);
+  padding: 0.85rem 1.75rem;
+  background: rgba(7, 17, 27, 0.78);
+  border-bottom: 1px solid rgba(148, 190, 208, 0.12);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .app-header {
+  background: rgba(249, 252, 252, 0.82);
+  border-bottom-color: rgba(15, 84, 96, 0.12);
+}
+
+.app-header label {
+  letter-spacing: 0.12em;
+  font-size: 0.6rem;
+  color: var(--text-dim) !important;
+}
+
+.app-header .form-select {
+  min-height: 38px;
+  border-radius: 11px;
+  background-color: rgba(16, 33, 49, 0.72);
+  border-color: rgba(148, 190, 208, 0.16);
+  color: var(--text-heading) !important;
+}
+
+[data-theme="light"] .app-header .form-select {
+  background-color: #ffffff;
+  color: var(--text-heading) !important;
+}
+
+.app-header .form-select:hover,
+.app-header .form-select:focus {
+  border-color: var(--border-active);
+  box-shadow: 0 0 0 3px rgba(39, 195, 218, 0.08);
+}
+
+.content-wrapper {
+  max-width: 1560px;
+  padding: 1.65rem 1.75rem 3.5rem;
+}
+
+.tab-section {
+  animation: sectionEnter 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tab-section.active-tab > * {
+  animation: childEnter 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.tab-section.active-tab > *:nth-child(2) { animation-delay: 0.045s; }
+.tab-section.active-tab > *:nth-child(3) { animation-delay: 0.09s; }
+.tab-section.active-tab > *:nth-child(4) { animation-delay: 0.135s; }
+
+@keyframes sectionEnter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes childEnter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ards-card {
+  border-radius: var(--radius-lg);
+  background: linear-gradient(145deg, rgba(16, 36, 51, 0.92), rgba(9, 23, 35, 0.90));
+  border-color: rgba(148, 190, 208, 0.15);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(16px);
+}
+
+.ards-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(62, 215, 207, 0.33);
+  box-shadow: var(--shadow-elevated);
+}
+
+[data-theme="light"] .ards-card {
+  background: linear-gradient(145deg, rgba(255,255,255,.98), rgba(246,252,252,.96)) !important;
+  border-color: rgba(15,84,96,.14) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+[data-theme="light"] .ards-card:hover {
+  border-color: rgba(8,145,178,.34) !important;
+  box-shadow: var(--shadow-elevated) !important;
+}
+
+.content-wrapper h2.text-2xl,
+.content-wrapper h3.text-lg,
+.content-wrapper h3.text-base {
+  letter-spacing: -0.025em;
+}
+
+.content-wrapper h2.text-2xl {
+  font-size: clamp(1.55rem, 2.4vw, 2.05rem);
+  line-height: 1.1;
+}
+
+.content-wrapper h2.text-2xl + p,
+.content-wrapper h2.text-2xl ~ p {
+  max-width: 760px;
+}
+
+.content-wrapper .border-slate-800,
+.content-wrapper .border-slate-800\/60,
+.content-wrapper .border-slate-800\/80,
+.content-wrapper .border-slate-700 {
+  border-color: rgba(148, 190, 208, 0.14) !important;
+}
+
+.content-wrapper .bg-slate-800,
+.content-wrapper .bg-slate-800\/80,
+.content-wrapper .bg-slate-900,
+.content-wrapper .bg-slate-900\/60,
+.content-wrapper .bg-slate-900\/80 {
+  background-color: rgba(8, 22, 34, 0.72) !important;
+}
+
+[data-theme="light"] .content-wrapper .bg-slate-800,
+[data-theme="light"] .content-wrapper .bg-slate-800\/80,
+[data-theme="light"] .content-wrapper .bg-slate-900,
+[data-theme="light"] .content-wrapper .bg-slate-900\/60,
+[data-theme="light"] .content-wrapper .bg-slate-900\/80 {
+  background-color: #eef7f7 !important;
+}
+
+.content-wrapper .form-input,
+.content-wrapper .form-select {
+  border-radius: 11px;
+  background-color: rgba(6, 19, 30, 0.76);
+  border-color: rgba(148, 190, 208, 0.18);
+  color: var(--text-heading);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast), background-color var(--t-fast);
+}
+
+.content-wrapper .form-input:focus,
+.content-wrapper .form-select:focus {
+  border-color: var(--border-active);
+  background-color: rgba(9, 27, 40, 0.92);
+  box-shadow: 0 0 0 4px rgba(39, 195, 218, 0.09);
+}
+
+[data-theme="light"] .content-wrapper .form-input,
+[data-theme="light"] .content-wrapper .form-select {
+  background-color: #ffffff;
+  color: var(--text-heading);
+  border-color: rgba(15,84,96,.18);
+}
+
+.stat-card {
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(17, 42, 57, 0.96), rgba(10, 26, 39, 0.92));
+  border-color: rgba(148, 190, 208, 0.15);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--t-base), border-color var(--t-base), box-shadow var(--t-base);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(62, 215, 207, 0.38);
+  box-shadow: var(--shadow-elevated);
+}
+
+[data-theme="light"] .stat-card {
+  background: linear-gradient(145deg, #ffffff, #f3fbfb);
+  border-color: rgba(15,84,96,.13);
+}
+
+.stat-value {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  letter-spacing: -0.045em;
+}
+
+/* Interactive controls */
+button,
+.btn,
+a[class*="bg-"] {
+  transition: transform var(--t-fast), box-shadow var(--t-fast), background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+}
+
+.content-wrapper button:not(.nav-btn):hover,
+.content-wrapper a.btn:hover {
+  transform: translateY(-2px);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-primary-hover);
+  outline-offset: 3px;
+}
+
+#csvDropzone {
+  border-color: rgba(39, 195, 218, 0.28) !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(39, 195, 218, 0.10), transparent 55%),
+    rgba(8, 22, 34, 0.52) !important;
+  min-height: 260px;
+  transition: border-color var(--t-base), background-color var(--t-base), transform var(--t-base), box-shadow var(--t-base);
+}
+
+#csvDropzone:hover {
+  transform: translateY(-3px);
+  border-color: rgba(98, 226, 234, 0.78) !important;
+  box-shadow: 0 16px 38px rgba(39, 195, 218, 0.12);
+}
+
+#csvDropzone > div:first-of-type {
+  background: rgba(39, 195, 218, 0.13) !important;
+  box-shadow: 0 0 0 10px rgba(39, 195, 218, 0.035);
+}
+
+input[type="range"] {
+  accent-color: var(--color-primary);
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 5px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, rgba(39,195,218,.76), rgba(45,212,191,.28));
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  margin-top: -5px;
+  width: 15px;
+  height: 15px;
+  border: 3px solid var(--bg-surface);
+  border-radius: 50%;
+  background: #62e2ea;
+  box-shadow: 0 0 0 4px rgba(39,195,218,.16), 0 0 14px rgba(39,195,218,.45);
+}
+
+table thead {
+  background: rgba(39, 195, 218, 0.065) !important;
+}
+
+table thead th {
+  color: #9ac4ce !important;
+  font-size: 0.62rem !important;
+  letter-spacing: 0.12em;
+}
+
+[data-theme="light"] table thead th {
+  color: #2a707d !important;
+}
+
+table tbody tr {
+  transition: background-color var(--t-fast);
+}
+
+table tbody tr:hover {
+  background: rgba(39, 195, 218, 0.055) !important;
+}
+
+/* Login: make the first touchpoint feel like a focused clinical command center */
+.login-screen {
+  align-items: center;
+  padding: clamp(1rem, 3vw, 2.75rem);
+  background:
+    radial-gradient(650px 500px at 12% 10%, rgba(39, 195, 218, 0.15), transparent 64%),
+    radial-gradient(700px 560px at 92% 90%, rgba(45, 212, 191, 0.13), transparent 64%),
+    #061019;
+}
+
+.login-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.26;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(116, 226, 225, .07) 1px, transparent 1px),
+    linear-gradient(rgba(116, 226, 225, .07) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse at center, black 12%, transparent 76%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 12%, transparent 76%);
+}
+
+.login-card.login-portal-card {
+  max-width: 1120px;
+  padding: clamp(1.2rem, 3vw, 2.7rem);
+  border: 1px solid rgba(126, 219, 224, 0.22);
+  border-radius: 30px;
+  background: linear-gradient(142deg, rgba(17, 43, 57, .96), rgba(6, 21, 32, .95) 72%);
+  box-shadow: 0 34px 100px rgba(0,0,0,.58), 0 0 80px rgba(39,195,218,.10);
+  animation: loginCardEnter 0.65s cubic-bezier(.22,1,.36,1);
+}
+
+@keyframes loginCardEnter {
+  from { opacity: 0; transform: translateY(18px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.login-portal-card > .flex.items-center.justify-between {
+  padding-bottom: 1.65rem;
+  margin-bottom: 1.65rem !important;
+  border-bottom: 1px solid rgba(148,190,208,.13);
+}
+
+.login-brand {
+  gap: 1rem;
+}
+
+.login-brand .ards-logo {
+  width: 54px;
+  height: 54px;
+  border-radius: 17px;
+}
+
+.login-brand .ards-logo-ecg {
+  width: 30px;
+  height: 30px;
+}
+
+.login-brand h1 {
+  font-size: clamp(1.4rem, 2.4vw, 2rem) !important;
+  letter-spacing: -0.04em;
+}
+
+.login-brand span {
+  color: #9ab7c2 !important;
+  line-height: 1.5;
+}
+
+.login-split-layout {
+  gap: clamp(1.5rem, 4vw, 3.8rem);
+}
+
+.login-quickfill-section {
+  padding: 1.55rem;
+  border: 1px solid rgba(148,190,208,.13);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(39,195,218,.11), transparent 55%),
+    rgba(6, 22, 33, .60);
+}
+
+.login-quickfill-section h3 {
+  letter-spacing: .14em;
+  font-size: .68rem !important;
+}
+
+.clinician-quickfill-grid {
+  gap: .65rem;
+}
+
+.quickfill-card {
+  min-height: 76px;
+  padding: .8rem .85rem;
+  border: 1px solid rgba(148,190,208,.14);
+  border-radius: 15px;
+  background: rgba(17, 42, 57, .58);
+}
+
+.quickfill-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(98,226,234,.58);
+  background: rgba(21, 55, 69, .82);
+  box-shadow: 0 12px 24px rgba(0,0,0,.24), 0 0 20px rgba(39,195,218,.08);
+}
+
+.quickfill-card .rounded-full {
+  border-color: rgba(149,221,224,.42) !important;
+}
+
+.login-manual-section {
+  padding-top: .15rem;
+}
+
+.login-tabs {
+  background: rgba(5, 18, 28, .65);
+  border-color: rgba(148,190,208,.15);
+  border-radius: 13px;
+  padding: 5px;
+}
+
+.login-tab {
+  min-height: 42px;
+  border-radius: 9px;
+}
+
+.login-tab-active,
+.login-tab.active {
+  color: #d9ffff !important;
+  background: linear-gradient(135deg, rgba(39,195,218,.28), rgba(45,212,191,.17)) !important;
+  box-shadow: 0 6px 16px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.login-field {
+  margin-bottom: 1.05rem;
+}
+
+.login-field label {
+  margin-bottom: .48rem;
+  color: #d8ecef !important;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.login-input-wrap {
+  border-radius: 13px;
+  background: rgba(5, 18, 28, .70);
+  border: 1px solid rgba(148,190,208,.18);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast), transform var(--t-fast);
+}
+
+.login-input-wrap:focus-within {
+  border-color: rgba(98,226,234,.72);
+  box-shadow: 0 0 0 4px rgba(39,195,218,.10);
+  transform: translateY(-1px);
+}
+
+.login-input {
+  min-height: 47px;
+  color: #f0fbfc !important;
+  background: transparent !important;
+}
+
+.login-input::placeholder {
+  color: #6c8995 !important;
+}
+
+.login-submit {
+  min-height: 50px;
+  border-radius: 13px;
+  background: linear-gradient(100deg, #1eb4d2, #22b99c);
+  box-shadow: 0 14px 28px rgba(24, 177, 184, .20);
+  font-weight: 800;
+  letter-spacing: .01em;
+  transition: transform var(--t-base), box-shadow var(--t-base), filter var(--t-base);
+}
+
+.login-submit:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.08);
+  box-shadow: 0 18px 32px rgba(24, 177, 184, .30);
+}
+
+.login-message {
+  border-radius: 12px;
+  animation: messageEnter .3s ease both;
+}
+
+@keyframes messageEnter {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.login-footer {
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(148,190,208,.12);
+  color: #76919b !important;
+}
+
+/* Modals and floating panels share the workspace surface language */
+.modal-backdrop,
+#modalAddPatient,
+#modalAddSession,
+#modalFeedback {
+  background: rgba(1, 9, 15, .76) !important;
+  backdrop-filter: blur(12px);
+}
+
+.modal-panel,
+#modalAddPatient > div,
+#modalAddSession > div,
+#modalFeedback > div {
+  border-radius: 24px !important;
+  border-color: rgba(148,190,208,.20) !important;
+  background: linear-gradient(145deg, #122c3c, #091923) !important;
+  box-shadow: 0 28px 80px rgba(0,0,0,.46) !important;
+}
+
+[data-theme="light"] .modal-panel,
+[data-theme="light"] #modalAddPatient > div,
+[data-theme="light"] #modalAddSession > div,
+[data-theme="light"] #modalFeedback > div {
+  background: linear-gradient(145deg, #ffffff, #f1fafa) !important;
+}
+
+/* Status lights and live feeds */
+#mqttStatusDot,
+#navAlertBadge {
+  box-shadow: 0 0 12px currentColor;
+}
+
+#mqttLogFeed,
+#pipelineLogFeed,
+#voiceTranscript {
+  border-color: rgba(39,195,218,.18) !important;
+  background:
+    linear-gradient(180deg, rgba(4,14,22,.88), rgba(7,21,31,.74)) !important;
+}
+
+/* Login exit and workstation lock transitions */
+.login-screen-leaving {
+  animation: loginExit .46s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+@keyframes loginExit {
+  to { opacity: 0; transform: scale(1.025); filter: blur(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .app-sidebar {
+    background: linear-gradient(180deg, #112b3b, #071620);
+  }
+
+  .content-wrapper {
+    padding: 1.4rem 1.15rem 3rem;
+  }
+
+  .app-header {
+    padding-inline: 1.15rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    padding: 1.1rem .8rem 2.5rem;
+  }
+
+  .app-header {
+    min-height: 66px;
+    padding: .7rem .8rem;
+  }
+
+  .app-header > div:first-of-type {
+    padding-top: .2rem;
+  }
+
+  .login-screen {
+    align-items: flex-start;
+    padding: 1rem .75rem;
+  }
+
+  .login-card.login-portal-card {
+    margin: auto 0;
+    border-radius: 22px;
+    padding: 1.1rem;
+  }
+
+  .login-portal-card > .flex.items-center.justify-between {
+    align-items: flex-start;
+    padding-bottom: 1.15rem;
+    margin-bottom: 1.15rem !important;
+  }
+
+  .login-brand {
+    align-items: flex-start;
+  }
+
+  .login-brand .ards-logo {
+    width: 45px;
+    height: 45px;
+    border-radius: 14px;
+  }
+
+  .login-brand .ards-logo-ecg {
+    width: 25px;
+    height: 25px;
+  }
+
+  .login-brand span {
+    font-size: .78rem !important;
+  }
+
+  .login-quickfill-section {
+    padding: 1rem;
+  }
+
+  .quickfill-card {
+    min-height: 68px;
+  }
+
+  .login-manual-section {
+    border-top: 1px solid rgba(148,190,208,.13);
+    padding-top: 1.25rem;
+  }
+
+  .tab-section.active-tab > * {
+    animation-delay: 0s !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-brand h1 {
+    font-size: 1.2rem !important;
+  }
+
+  .login-brand span {
+    font-size: .7rem !important;
+  }
+
+  .clinician-quickfill-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
    ARDS CLINICAL AUTHENTICATION & WORKSTATION LOCK STYLES
    ========================================================================== */
 
