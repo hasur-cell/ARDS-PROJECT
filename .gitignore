@@ -3,3 +3,4 @@ ARDS-PROJECT.git
 ARDS-PROJECT-NEW
 node_modules/
 *.log
+.env
