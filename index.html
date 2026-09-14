@@ -69,7 +69,7 @@
           </div>
           <div class="flex flex-col min-w-0">
             <h1 class="text-2xl font-bold text-white leading-tight tracking-tight">Clinician Access Portal</h1>
-            <span class="text-sm text-slate-200 mt-1">Authenticate to access patient telemetry and AI decision protocols.</span>
+            <span class="text-sm text-slate-200 mt-1">Sign in to view your rehabilitation session.</span>
           </div>
         </div>
         <div class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium">
@@ -84,9 +84,9 @@
           <div class="flex items-center justify-between mb-4">
             <h3 class="text-xs font-bold text-white uppercase tracking-widest flex items-center gap-2">
               <i data-lucide="zap" class="w-3.5 h-3.5 text-amber-400"></i>
-              1-Click Clinician Quick-Fill:
+              Quick test sign-in
             </h3>
-            <span class="text-[10px] text-slate-300">Select any role to test</span>
+            <span class="text-[10px] text-slate-300">Choose a demo account</span>
           </div>
           
           <div class="clinician-quickfill-grid">
@@ -313,49 +313,54 @@
 
         <button class="nav-btn" data-tab="upload" id="nav-btn-upload" onclick="window.switchTab('upload')">
           <i data-lucide="upload-cloud" class="w-4 h-4 text-teal-400"></i>
-          <span>2. Data Upload & Pipeline</span>
+          <span>2. Upload Data</span>
         </button>
 
         <button class="nav-btn" data-tab="progress" id="nav-btn-progress" onclick="window.switchTab('progress')">
           <i data-lucide="trending-up" class="w-4 h-4 text-emerald-400"></i>
-          <span>3. Progress & Analytics</span>
+          <span>3. Progress</span>
         </button>
 
         <button class="nav-btn" data-tab="xai" id="nav-btn-xai" onclick="window.switchTab('xai')">
           <i data-lucide="brain-circuit" class="w-4 h-4 text-purple-400"></i>
-          <span>4. AI Explanation (XAI)</span>
+          <span>4. AI Explanation</span>
         </button>
 
         <button class="nav-btn" data-tab="aiinsights" id="nav-btn-aiinsights" onclick="window.switchTab('aiinsights')">
           <i data-lucide="sparkles" class="w-4 h-4 text-violet-300"></i>
-          <span>5. Gait AI Insights</span>
+          <span>5. Gait Insights</span>
         </button>
 
         <button class="nav-btn" data-tab="alerts" id="nav-btn-alerts" onclick="window.switchTab('alerts')">
           <i data-lucide="bell" class="w-4 h-4 text-amber-400"></i>
-          <span>6. Alerts & Feed</span>
+          <span>6. Alerts</span>
           <span id="navAlertBadge"
             class="ml-auto px-1.5 py-0.2 rounded-full text-[10px] font-extrabold bg-rose-500 text-white hidden">0</span>
         </button>
 
+        <button class="nav-btn" data-tab="community" id="nav-btn-community" onclick="window.switchTab('community')">
+          <i data-lucide="users-round" class="w-4 h-4 text-pink-400"></i>
+          <span>7. Community Connect</span>
+        </button>
+
         <button class="nav-btn" data-tab="decision" id="nav-btn-decision" onclick="window.switchTab('decision')">
           <i data-lucide="shield-check" class="w-4 h-4 text-cyan-400"></i>
-          <span>7. Decision & Safety Log</span>
+          <span>8. Safety Log</span>
         </button>
 
         <button class="nav-btn" data-tab="reports" id="nav-btn-reports" onclick="window.switchTab('reports')">
           <i data-lucide="file-text" class="w-4 h-4 text-indigo-400"></i>
-          <span>8. Clinical Reports</span>
+          <span>9. Reports</span>
         </button>
 
         <button class="nav-btn" data-tab="voice" id="nav-btn-voice" onclick="window.switchTab('voice')">
           <i data-lucide="mic" class="w-4 h-4 text-fuchsia-400"></i>
-          <span>9. Voice & Language</span>
+          <span>10. Voice</span>
         </button>
 
         <button class="nav-btn" data-tab="about" id="nav-btn-about" onclick="window.switchTab('about')">
           <i data-lucide="info" class="w-4 h-4 text-slate-400"></i>
-          <span>10. About & Disclaimer</span>
+          <span>11. About</span>
         </button>
       </nav>
 
@@ -658,9 +663,8 @@
 
           <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-              <h2 class="text-2xl font-bold text-slate-100">Data Ingestion & ML Processing Pipeline</h2>
-              <p class="text-sm text-slate-400 mt-1">Upload session telemetry CSV or load clinical presets to execute
-                the animated 9-stage analysis pipeline.</p>
+            <h2 class="text-2xl font-bold text-slate-100">Upload Session Data</h2>
+            <p class="text-sm text-slate-400 mt-1">Upload a CSV or choose a sample session.</p>
             </div>
             <div class="flex items-center gap-2 flex-wrap">
               <button id="btnDownloadSampleCSV"
@@ -679,10 +683,8 @@
               <div class="w-16 h-16 rounded-2xl bg-sky-500/10 text-sky-400 flex items-center justify-center mb-3">
                 <i data-lucide="file-up" class="w-8 h-8"></i>
               </div>
-              <h4 class="text-base font-bold text-slate-200">Drag and drop your Session CSV here</h4>
-              <p class="text-xs text-slate-400 mt-1">Required columns: <code
-                  class="text-sky-300 font-mono">Patient, Session, Gait Speed, Symmetry, Force, Pressure, Stability, Fatigue</code>
-              </p>
+              <h4 class="text-base font-bold text-slate-200">Drop a session CSV here</h4>
+              <p class="text-xs text-slate-400 mt-1">Use the sample file or upload your own session data.</p>
               <div class="mt-4 flex items-center gap-2">
                 <span class="px-3 py-1 text-xs font-semibold rounded-lg bg-sky-600 text-white">Browse Files</span>
               </div>
@@ -722,12 +724,12 @@
                 <button id="btnImportAllCsvPatients"
                   class="px-3.5 py-2 text-xs font-bold rounded-xl bg-slate-800 hover:bg-slate-700 text-teal-300 border border-teal-500/30 transition flex items-center gap-1.5 shadow-sm">
                   <i data-lucide="user-check" class="w-4 h-4"></i>
-                  <span>Import / Register Patient from CSV</span>
+                  <span>Import Patient</span>
                 </button>
                 <button id="btnRunPipeline"
                   class="px-5 py-2 text-xs font-bold rounded-xl bg-gradient-to-r from-sky-600 to-teal-500 hover:from-sky-500 hover:to-teal-400 text-white shadow-lg shadow-sky-500/25 transition flex items-center gap-2">
                   <i data-lucide="play" class="w-4 h-4"></i>
-                  <span>Analyze Session (Run 9-Stage Pipeline)</span>
+                  <span>Analyze Session</span>
                 </button>
               </div>
             </div>
@@ -761,10 +763,9 @@
               <div>
                 <h3 class="text-lg font-bold text-slate-100 flex items-center gap-2">
                   <i data-lucide="cpu" class="w-5 h-5 text-sky-400"></i>
-                  <span>Animated 9-Stage Clinical ML Pipeline</span>
+                  <span>Session Analysis</span>
                 </h3>
-                <p class="text-xs text-slate-400 mt-0.5">Automated signal conditioning, ensemble inference, and safety
-                  governor execution.</p>
+                <p class="text-xs text-slate-400 mt-0.5">The system checks the data in 9 short steps.</p>
               </div>
 
               <div id="pipelineSuccessBanner"
@@ -788,13 +789,12 @@
             <!-- Streaming Telemetry Console Feed -->
             <div>
               <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
-                <span class="font-mono font-semibold uppercase">Real-Time Telemetry & Decision Log Stream</span>
-                <span class="text-[10px] text-slate-500">Sampling Rate: 100 Hz</span>
+                <span class="font-mono font-semibold uppercase">Analysis Log</span>
+                <span class="text-[10px] text-slate-500">Live</span>
               </div>
               <div id="pipelineLogFeed"
                 class="p-4 rounded-xl bg-black/60 border border-slate-800 font-mono text-xs text-slate-300 h-40 overflow-y-auto space-y-1.5">
-                <div class="text-slate-500 italic">[READY] System initialized. Click "Analyze Session" to start
-                  processing...</div>
+                <div class="text-slate-500 italic">Ready. Click “Analyze Session” to begin.</div>
               </div>
             </div>
           </div>
@@ -808,9 +808,8 @@
         <section id="section-progress" class="tab-section hidden space-y-6">
 
           <div>
-            <h2 class="text-2xl font-bold text-slate-100">Longitudinal Rehabilitation Analytics</h2>
-            <p class="text-sm text-slate-400 mt-1">Multi-session progression trends, score trajectory, and vital
-              biomechanical correlations.</p>
+            <h2 class="text-2xl font-bold text-slate-100">Progress</h2>
+            <p class="text-sm text-slate-400 mt-1">See how the session score changes over time.</p>
           </div>
 
           <!-- Primary Score Line Chart -->
@@ -909,9 +908,8 @@
         <section id="section-xai" class="tab-section hidden space-y-6">
 
           <div>
-            <h2 class="text-2xl font-bold text-slate-100">Explainable AI (XAI) & Interpretability</h2>
-            <p class="text-sm text-slate-400 mt-1">SHAP-style biomechanical feature contribution breakdown and
-              interactive sensitivity simulator.</p>
+            <h2 class="text-2xl font-bold text-slate-100">Why This Result?</h2>
+            <p class="text-sm text-slate-400 mt-1">See what changed the score. Try the sliders.</p>
           </div>
 
           <!-- Prediction Card -->
@@ -931,8 +929,8 @@
             <div class="ards-card p-6 space-y-4">
               <div class="flex items-center justify-between border-b border-slate-800 pb-3">
                 <div>
-                  <h3 class="text-base font-bold text-slate-100">Biomechanical Feature Contributions</h3>
-                  <p class="text-xs text-slate-400">Signed percentage impact relative to baseline</p>
+              <h3 class="text-base font-bold text-slate-100">What Affected the Score?</h3>
+              <p class="text-xs text-slate-400">How each measure helped or lowered the result</p>
                 </div>
                 <span class="text-xs font-mono text-emerald-400 font-semibold">SHAP Surrogate</span>
               </div>
@@ -946,8 +944,8 @@
             <div class="ards-card p-6 space-y-5">
               <div class="flex items-center justify-between border-b border-slate-800 pb-3">
                 <div>
-                  <h3 class="text-base font-bold text-slate-100">Interactive "What-If" Simulator</h3>
-                  <p class="text-xs text-slate-400">Adjust biomechanical parameters to test real-time model response</p>
+                  <h3 class="text-base font-bold text-slate-100">Try a Change</h3>
+                  <p class="text-xs text-slate-400">Move a slider to see what could change</p>
                 </div>
                 <button id="btnResetSim" class="text-xs font-semibold text-sky-400 hover:text-sky-300">Reset
                   Values</button>
@@ -1030,8 +1028,7 @@
               <div
                 class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 text-[11px] text-slate-400 leading-relaxed">
                 <i data-lucide="info" class="w-3.5 h-3.5 inline text-sky-400 mr-1"></i>
-                Moving the sliders immediately re-calculates the Rehabilitation Score, Condition Classification, and XAI
-                contributions above without modifying persisted session history.
+                Move a slider to see the new score. Saved sessions stay the same.
               </div>
             </div>
 
@@ -1050,9 +1047,8 @@
 
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-              <h2 class="text-2xl font-bold text-slate-100">Clinical Alerts & Notifications</h2>
-              <p class="text-sm text-slate-400 mt-1">Real-time safety events, threshold breaches, and automated
-                clinician triage feed.</p>
+            <h2 class="text-2xl font-bold text-slate-100">Alerts</h2>
+            <p class="text-sm text-slate-400 mt-1">Review safety messages from this session.</p>
             </div>
 
             <!-- Filter Tabs -->
@@ -1080,14 +1076,105 @@
 
 
         <!-- ============================================================== -->
-        <!-- SECTION 6: DECISION & SAFETY LOG                               -->
+        <!-- SECTION 6: COMMUNITY CONNECT                                    -->
+        <!-- ============================================================== -->
+        <section id="section-community" class="tab-section hidden space-y-6">
+          <div class="community-hero">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="community-eyebrow"><i data-lucide="heart-handshake" class="w-3.5 h-3.5"></i> Peer support</span>
+                <span class="community-private-badge"><i data-lucide="lock" class="w-3 h-3"></i> Private demo</span>
+              </div>
+              <h2 class="text-2xl font-bold text-slate-100">Community Connect</h2>
+              <p class="text-sm text-slate-300 mt-1 max-w-2xl">Meet another amputee who understands the journey. Send a connection request and learn from each other.</p>
+            </div>
+            <div class="community-hero-icon" aria-hidden="true">
+              <i data-lucide="users-round" class="w-7 h-7"></i>
+            </div>
+          </div>
+
+          <div class="community-note">
+            <i data-lucide="shield-check" class="w-4 h-4 text-teal-300 flex-shrink-0"></i>
+            <p>Use a nickname. Share only what feels safe. This prototype saves connection choices on this device.</p>
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h3 class="text-lg font-bold text-slate-100">People you may connect with</h3>
+              <p class="text-xs text-slate-400 mt-1">Choose someone with a similar experience or goal.</p>
+            </div>
+            <label class="community-filter">
+              <span class="sr-only">Filter peers</span>
+              <i data-lucide="filter" class="w-3.5 h-3.5"></i>
+              <select id="communityGoalFilter" aria-label="Filter peers by goal">
+                <option value="all">All goals</option>
+                <option value="walking">Walking</option>
+                <option value="sports">Sports</option>
+                <option value="confidence">Confidence</option>
+              </select>
+            </label>
+          </div>
+
+          <div id="communityConnections" class="community-grid">
+            <article class="community-peer-card" data-goal="walking">
+              <div class="community-peer-top">
+                <div class="community-avatar community-avatar-cyan">AM</div>
+                <span class="community-online"><span></span> Open to connect</span>
+              </div>
+              <h4>Maya, 29</h4>
+              <p class="community-peer-meta">Below-knee amputee · 2 years</p>
+              <p class="community-peer-bio">“I’m learning to walk longer distances and would love to share small wins.”</p>
+              <div class="community-tags"><span>Walking</span><span>English</span></div>
+              <button type="button" class="community-connect-btn" data-peer="maya">
+                <i data-lucide="user-plus" class="w-4 h-4"></i><span>Connect</span>
+              </button>
+            </article>
+
+            <article class="community-peer-card" data-goal="sports">
+              <div class="community-peer-top">
+                <div class="community-avatar community-avatar-purple">JR</div>
+                <span class="community-online"><span></span> Open to connect</span>
+              </div>
+              <h4>Jordan, 34</h4>
+              <p class="community-peer-meta">Above-knee amputee · 5 years</p>
+              <p class="community-peer-bio">“Happy to talk about getting back to sport and choosing a prosthesis.”</p>
+              <div class="community-tags"><span>Sports</span><span>English</span></div>
+              <button type="button" class="community-connect-btn" data-peer="jordan">
+                <i data-lucide="user-plus" class="w-4 h-4"></i><span>Connect</span>
+              </button>
+            </article>
+
+            <article class="community-peer-card" data-goal="confidence">
+              <div class="community-peer-top">
+                <div class="community-avatar community-avatar-orange">SK</div>
+                <span class="community-online"><span></span> Open to connect</span>
+              </div>
+              <h4>Sam, 41</h4>
+              <p class="community-peer-meta">Below-knee amputee · 8 months</p>
+              <p class="community-peer-bio">“I’m new to this and want to build confidence with someone who understands.”</p>
+              <div class="community-tags"><span>Confidence</span><span>Hindi / English</span></div>
+              <button type="button" class="community-connect-btn" data-peer="sam">
+                <i data-lucide="user-plus" class="w-4 h-4"></i><span>Connect</span>
+              </button>
+            </article>
+          </div>
+
+          <div id="communityEmptyState" class="community-empty hidden">
+            <i data-lucide="users-round" class="w-6 h-6"></i>
+            <p>No peers match this goal yet.</p>
+          </div>
+          <div id="communityStatus" class="community-status" role="status" aria-live="polite"></div>
+        </section>
+
+
+        <!-- ============================================================== -->
+        <!-- SECTION 7: DECISION & SAFETY LOG                               -->
         <!-- ============================================================== -->
         <section id="section-decision" class="tab-section hidden space-y-6">
 
           <div>
-            <h2 class="text-2xl font-bold text-slate-100">Transparent Decision & Safety Governor Log</h2>
-            <p class="text-sm text-slate-400 mt-1">Rule execution engine matrix, physiological constraints, and
-              automated safety override logs.</p>
+            <h2 class="text-2xl font-bold text-slate-100">Safety Log</h2>
+            <p class="text-sm text-slate-400 mt-1">See the rules behind each recommendation.</p>
           </div>
 
           <!-- Active Rule Card -->
@@ -1106,8 +1193,7 @@
               <i data-lucide="git-branch" class="w-4 h-4 text-teal-400"></i>
               <span>Transparent Decision Rule Engine Matrix</span>
             </h3>
-            <p class="text-xs text-slate-400">The adaptive rule engine evaluates multi-dimensional state vectors to ensure
-              clinically guarded progression:</p>
+            <p class="text-xs text-slate-400">The system checks each session against safety rules.</p>
 
             <div class="overflow-x-auto">
               <table class="w-full text-xs text-left border border-slate-800 rounded-xl overflow-hidden">
@@ -1198,9 +1284,8 @@
 
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 no-print">
             <div>
-              <h2 class="text-2xl font-bold text-slate-100">Physiotherapy Clinical Session Report</h2>
-              <p class="text-sm text-slate-400 mt-1">Comprehensive printable documentation with XAI interpretability and
-                digital clinical sign-off.</p>
+              <h2 class="text-2xl font-bold text-slate-100">Session Report</h2>
+              <p class="text-sm text-slate-400 mt-1">Print or export this session.</p>
             </div>
 
             <div class="flex items-center gap-2 flex-wrap">
@@ -1233,14 +1318,13 @@
 
 
         <!-- ============================================================== -->
-        <!-- SECTION 9: ABOUT & DISCLAIMER                                  -->
+        <!-- SECTION 11: ABOUT & DISCLAIMER                                 -->
         <!-- ============================================================== -->
         <section id="section-about" class="tab-section hidden space-y-6">
 
           <div>
-            <h2 class="text-2xl font-bold text-slate-100">About the Research Prototype</h2>
-            <p class="text-sm text-slate-400 mt-1">System architecture, biomechanical scoring formulation, and
-              regulatory disclaimers.</p>
+            <h2 class="text-2xl font-bold text-slate-100">About ARDS</h2>
+            <p class="text-sm text-slate-400 mt-1">What this tool does and what it cannot do.</p>
           </div>
 
           <!-- Mandatory Clinical Disclaimer Box -->
@@ -1250,15 +1334,9 @@
               <span>Medical &amp; Regulatory Prototype Disclaimer</span>
             </div>
             <ul class="space-y-2 text-xs text-amber-100/90 leading-relaxed list-disc list-inside">
-              <li><strong>Software-Only Research Prototype:</strong> The Adaptive Rehabilitation Decision Support System
-                is an academic and engineering prototype. It is <strong>NOT</strong> an FDA/CE-cleared medical
-                device.</li>
-              <li><strong>Clinical Decision Support Only:</strong> This system does not replace the professional
-                clinical diagnosis, physical assessment, or treatment judgment of certified physiotherapists,
-                prosthetists, or orthopedic physicians.</li>
-              <li><strong>Synthetic &amp; Simulated Telemetry:</strong> Data displayed in this prototype may contain
-                synthetic, simulated, or anonymized biomechanical datasets designed to demonstrate system behaviors and
-                safety governor algorithms.</li>
+                <li>This is a research prototype, not a certified medical device.</li>
+              <li>It supports clinicians but does not replace their exam or judgment.</li>
+              <li>Some data is sample, simulated, or anonymized data.</li>
             </ul>
           </div>
 
@@ -1269,8 +1347,7 @@
               <span>Rehabilitation Composite Scoring Formula</span>
             </h3>
             <p class="text-xs text-slate-400 leading-relaxed">
-              The Rehabilitation Score ($0–100$) integrates 5 core biomechanical domains weighted by clinical
-              recovery priority:
+              The score (0–100) combines five movement and safety measures:
             </p>
             <div
               class="p-4 rounded-xl bg-slate-900 font-mono text-xs text-sky-300 border border-slate-800 overflow-x-auto">
@@ -1305,28 +1382,24 @@
               <i data-lucide="layers" class="w-5 h-5 text-teal-400"></i>
               <span>Modular System Architecture</span>
             </h3>
-            <p class="text-xs text-slate-400">The system follows a modular 4-tier decoupled pipeline:</p>
+            <p class="text-xs text-slate-400">The system works in four simple steps:</p>
 
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
               <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
                 <div class="font-bold text-sky-400 mb-1">1. Sensing &amp; Ingestion</div>
-                <p class="text-slate-400 text-[11px]">Wearable IMUs, socket capacitive pressure arrays, and
-                  force-sensing insoles.</p>
+                <p class="text-slate-400 text-[11px]">Collect movement and pressure data.</p>
               </div>
               <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
                 <div class="font-bold text-teal-400 mb-1">2. ML Inference Engine</div>
-                <p class="text-slate-400 text-[11px]">Ensemble Random Forest &amp; SHAP surrogate for spatiotemporal
-                  gait classification.</p>
+                <p class="text-slate-400 text-[11px]">Find patterns in the session.</p>
               </div>
               <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
                 <div class="font-bold text-amber-400 mb-1">3. Safety Governor</div>
-                <p class="text-slate-400 text-[11px]">Deterministic rule bounds clamping progression to protect stump
-                  tissue integrity.</p>
+                <p class="text-slate-400 text-[11px]">Check limits and flag safety concerns.</p>
               </div>
               <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
                 <div class="font-bold text-emerald-400 mb-1">4. Human-in-the-Loop</div>
-                <p class="text-slate-400 text-[11px]">Interactive clinician dashboard, alert triage, and printable
-                  clinical sign-offs.</p>
+                <p class="text-slate-400 text-[11px]">Let a clinician review the result.</p>
               </div>
             </div>
           </div>
@@ -1335,14 +1408,13 @@
 
 
         <!-- ============================================================== -->
-        <!-- SECTION 8: VOICE RECOGNITION & LANGUAGE                         -->
+        <!-- SECTION 10: VOICE RECOGNITION & LANGUAGE                        -->
         <!-- ============================================================== -->
         <section id="section-voice" class="tab-section hidden space-y-6">
 
           <div>
-            <h2 class="text-2xl font-bold text-slate-100">Voice Recognition & Language</h2>
-            <p class="text-sm text-slate-400 mt-1">Select the speech recognition language, control the microphone, and
-              interact with the clinical voice assistant.</p>
+            <h2 class="text-2xl font-bold text-slate-100">Voice Assistant</h2>
+            <p class="text-sm text-slate-400 mt-1">Choose a language and ask about the current session.</p>
           </div>
 
           <!-- Language Selection -->
@@ -1352,8 +1424,7 @@
                 <i data-lucide="languages" class="w-5 h-5 text-sky-400"></i>
                 <div>
                   <h3 class="text-base font-bold text-slate-100">Recognition Language</h3>
-                  <p class="text-xs text-slate-400">Applies to both microphone input (speech-to-text) and spoken
-                    responses (text-to-speech).</p>
+                    <p class="text-xs text-slate-400">Used for listening and spoken replies.</p>
                 </div>
               </div>
               <div class="flex items-center gap-2 flex-wrap">
@@ -1374,8 +1445,7 @@
             <div
               class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 text-[11px] text-slate-400 leading-relaxed">
               <i data-lucide="info" class="w-3.5 h-3.5 inline text-sky-400 mr-1"></i>
-              Your language preference is saved automatically and restored on the next visit. Available voices depend on
-              your browser and operating system language packs.
+                Your language choice is saved for your next visit.
             </div>
           </div>
 
@@ -1445,8 +1515,7 @@
               <div
                 class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 text-[11px] text-slate-400 leading-relaxed">
                 <i data-lucide="info" class="w-3.5 h-3.5 inline text-sky-400 mr-1"></i>
-                Voice commands can query the current session, rehabilitation score, fatigue level, socket pressure, and
-                clinical recommendations, and can navigate between dashboard sections.
+                Ask about the score, fatigue, pressure, or recommendation. You can also open a dashboard section.
               </div>
             </div>
 
@@ -1922,6 +1991,7 @@
   <script src="js/charts.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/community.js"></script>
   <script src="js/voice-assistant.js"></script>
   <script src="js/voice-ui.js"></script>
   <script src="js/chatbot.js"></script>
